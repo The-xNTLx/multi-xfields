@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Multi XFields</id>
+	<version>1.3</version>
+	<vqmver>2.4.1</vqmver>
+	<author>MaRZoCHi</author>
+	<file name="engine/modules/show.full.php">
+		<operation>
+			<ignoreif><![CDATA[if ( $value[3] == "checkbox" AND ! empty( $xfieldsdata[$value[0]] ) ) {]]></ignoreif>
+			<search position="before" offset="3"><![CDATA[$tpl->copy_template = str_replace( "[xfvalue_{$value[0]}]", $xfieldsdata[$value[0]], $tpl->copy_template );]]></search>
+			<add><![CDATA[
+// MWS Multi XFields
+				if ( $value[3] == "checkbox" AND ! empty( $xfieldsdata[$value[0]] ) ) {
+					$valcb = explode( "\r\n", $value[4] );
+					$selcb = explode( "~~", $xfieldsdata[ $value[0] ] );
+					$tpl2 = new dle_template();
+					$tpl2->dir = TEMPLATE_DIR;
+					$tpl2->load_template( 'xfield_checkbox.tpl' );
+					if ( $value[6] == "1" ) {
+						preg_match( "#.?>(.+?)</a>#i", $xfieldsdata[ $value[0] ], $item );
+						$item = $item[1];
+						$items = explode( "~~", $item );
+						foreach( $items as $val ) {
+							$term = ( $config['allow_alt_url'] == "yes" ) ? "xfsearch/" : "index.php?do=xfsearch&xf=";
+							$tpl2->set( '{name}', str_replace( "'", "&#039;", "<a href=\"{$config['http_home_url']}{$term}" . urlencode( $val ) . "\">{$val}</a>" ) );
+							$tpl2->compile( 'xfield_checkbox' );
+						}
+					} else {
+						foreach( $selcb as $seldata ) {
+							if ( in_array( $seldata, $valcb ) ) {
+								$tpl2->set( '{name}', str_replace( "'", "&#039;", $seldata ) );
+								$tpl2->compile( 'xfield_checkbox' );
+							}
+						}
+					}
+					$tpl->copy_template = str_replace( "[xfvalue_{$value[0]}]", $tpl2->result['xfield_checkbox'], $tpl->copy_template );
+				}
+// MWS Multi XFields
+]]></add>
+		</operation>
+	</file>
+	<file name="engine/modules/show.short.php">
+		<operation>
+			<ignoreif><![CDATA[if ( $value[3] == "checkbox" AND ! empty( $xfieldsdata[$value[0]] ) ) {]]></ignoreif>
+			<search position="before"><![CDATA[$xfieldsdata[$value[0]] = stripslashes( $xfieldsdata[$value[0]] );]]></search>
+			<add><![CDATA[
+// MWS Multi XFields
+				if ( $value[3] == "checkbox" AND ! empty( $xfieldsdata[$value[0]] ) ) {
+					$valcb = explode( "\r\n", $value[4] );
+					$selcb = explode( "~~", $xfieldsdata[ $value[0] ] );
+					$tpl2 = new dle_template();
+					$tpl2->dir = TEMPLATE_DIR;
+					$tpl2->load_template( 'xfield_checkbox.tpl' );
+					if ( $value[6] == "1" ) {
+						preg_match( "#.?>(.+?)</a>#i", $xfieldsdata[ $value[0] ], $item );
+						$item = $item[1];
+						$items = explode( "~~", $item );
+						foreach( $items as $val ) {
+							$term = ( $config['allow_alt_url'] == "yes" ) ? "xfsearch/" : "index.php?do=xfsearch&xf=";
+							$tpl2->set( '{name}', str_replace( "'", "&#039;", "<a href=\"{$config['http_home_url']}{$term}" . urlencode( $val ) . "\">{$val}</a>" ) );
+							$tpl2->compile( 'xfield_checkbox' );
+						}
+					} else {
+						foreach( $selcb as $seldata ) {
+							if ( in_array( $seldata, $valcb ) ) {
+								$tpl2->set( '{name}', str_replace( "'", "&#039;", $seldata ) );
+								$tpl2->compile( 'xfield_checkbox' );
+							}
+						}
+					}
+					$tpl->copy_template = str_replace( "[xfvalue_{$value[0]}]", $tpl2->result['xfield_checkbox'], $tpl->copy_template );
+				}
+// MWS Multi XFields
+]]></add>
+		</operation>
+	</file>
+	<file name="engine/modules/show.custom.php">
+		<operation>
+			<ignoreif><![CDATA[if ( $value[3] == "checkbox" AND ! empty( $xfieldsdata[$value[0]] ) ) {]]></ignoreif>
+			<search position="before"><![CDATA[$xfieldsdata[$value[0]] = stripslashes( $xfieldsdata[$value[0]] );]]></search>
+			<add><![CDATA[
+// MWS Multi XFields
+				if ( $value[3] == "checkbox" AND ! empty( $xfieldsdata[$value[0]] ) ) {
+					$valcb = explode( "\r\n", $value[4] );
+					$selcb = explode( "~~", $xfieldsdata[ $value[0] ] );
+					$tpl2 = new dle_template();
+					$tpl2->dir = TEMPLATE_DIR;
+					$tpl2->load_template( 'xfield_checkbox.tpl' );
+					if ( $value[6] == "1" ) {
+						preg_match( "#.?>(.+?)</a>#i", $xfieldsdata[ $value[0] ], $item );
+						$item = $item[1];
+						$items = explode( "~~", $item );
+						foreach( $items as $val ) {
+							$term = ( $config['allow_alt_url'] == "yes" ) ? "xfsearch/" : "index.php?do=xfsearch&xf=";
+							$tpl2->set( '{name}', str_replace( "'", "&#039;", "<a href=\"{$config['http_home_url']}{$term}" . urlencode( $val ) . "\">{$val}</a>" ) );
+							$tpl2->compile( 'xfield_checkbox' );
+						}
+					} else {
+						foreach( $selcb as $seldata ) {
+							if ( in_array( $seldata, $valcb ) ) {
+								$tpl2->set( '{name}', str_replace( "'", "&#039;", $seldata ) );
+								$tpl2->compile( 'xfield_checkbox' );
+							}
+						}
+					}
+					$tpl->copy_template = str_replace( "[xfvalue_{$value[0]}]", $tpl2->result['xfield_checkbox'], $tpl->copy_template );
+				}
+// MWS Multi XFields
+]]></add>
+		</operation>
+	</file>
+</modification>
